@@ -1,0 +1,26 @@
+About this project
+------------------
+This project is a small addition to the functionality of AFAS Personal, formerly known as Yunoo (see http://www.afaspersonal.nl). AFAS is a web application that keeps track of your expenses/budget. In order to do that, it needs to have info from your bank account. That works as follows. You extract/download the transaction from your account into a CSV file. That file in turn, is read in by AFAS. And while AFAS already supports quite a number of (especially) Dutch and Belgian banks, it doesn't support all of them (yet). AFAS has provided a more or less generic interface format that can be used to upload bank transactions. They use the 'ING' format for that. So if your bank is not supported yet, and you can figure out how to convert the format of your transactions into the generic format, you can use this nice application too.
+This project converts exported files from RecordBank into the generic AFAS format.
+
+HOWTO use it
+------------
+For simplicity sake I assume that you a know a bit of using the commandline. If not, google and learn. It's not hard.
+
+What you need is:
+- a software package that converts a XLS file to CSV (LibreOffice will do fine)
+- AWK
+- the number of your bankaccount (e.g. 123-1234567-12 or similar)
+
+UNIX/LINUX: supported out of the box.
+Download your transactions (recordb-trans.xls). Then convert to a CSV file using LibreOffice or similar (recordb-trans.csv). Next you will have to use the commandline:
+$ ./record2def.sh recordb-trans.csv bankaccount-nr > def-trans.csv
+After that, upload the def-trans.csv to AFAS (and select the generic fomat - ING - from the list of banks). You're done.
+
+WINDOWS: if not already done, install LibreOffice and cygwin (minimal install) - that will provide all the basic unix goodies including AWK. 
+See unix instructions.
+
+GOTCHAS
+-------
+Watch out for locale (language and decimal format) settings. The dutch decimal separator (,) is the same as the field separator.
+
